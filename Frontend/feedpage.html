@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feed - Social Site</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #f3f4f6; /* Match with the theme */
+      font-family: 'Arial', sans-serif;
+    }
+    .navbar {
+      background-color: #1e293b; /* Match the navbar color */
+      color: #f8fafc; /* Off-white text color */
+    }
+    .feed-card:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s ease;
+    }
+    .like-button {
+      transition: transform 0.2s ease;
+    }
+    .like-button:active {
+      transform: scale(1.2);
+    }
+    #comment-panel {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    #comment-panel.open {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar p-4 shadow-lg flex justify-between items-center">
+    <div class="flex items-center space-x-3">
+      <img src="/logo.png" alt="Logo" class="h-8">
+      <h1 class="text-2xl font-semibold">Social Site</h1>
+    </div>
+    <div>
+      <button class="px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-500">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Feed Section -->
+  <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Feed Card Example -->
+    <div class="feed-card bg-white rounded shadow overflow-hidden cursor-pointer" data-full-description="This is the full description of the post.">
+      <img src="/path-to-image.jpg" alt="Post Image" class="w-full h-64 object-cover">
+      <div class="p-4">
+        <h2 class="text-lg font-bold text-gray-800">Post Title</h2>
+        <p class="text-gray-600 text-sm">Brief description...</p>
+      </div>
+    </div>
+
+    <!-- Add more cards dynamically here -->
+  </div>
+
+  <!-- Modal for Expanded View -->
+  <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden w-11/12 sm:w-3/4 lg:w-2/3">
+      <div class="flex">
+        <div class="w-1/2">
+          <img id="modal-image" src="/path-to-image.jpg" alt="Post Image" class="w-full h-full object-cover">
+        </div>
+        <div class="w-1/2 p-4">
+          <h2 id="modal-title" class="text-xl font-bold text-gray-800">Post Title</h2>
+          <p id="modal-description" class="text-gray-600 my-2">Full description of the post...</p>
+          <div class="flex items-center space-x-4 mt-4">
+            <button id="like-button" class="like-button text-pink-600">❤️ <span id="like-count">120</span> Likes</button>
+            <button id="comment-button" class="text-blue-600">💬 <span id="comment-count">15</span> Comments</button>
+          </div>
+          <button id="close-modal" class="mt-4 px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comment Panel -->
+  <div id="comment-panel" class="fixed inset-y-0 right-0 bg-white shadow-lg w-1/3 p-4">
+    <h2 class="text-xl font-bold text-gray-800">Comments</h2>
+    <div id="comments-list" class="my-4 space-y-2">
+      <!-- Comments will be dynamically added here -->
+    </div>
+    <textarea id="new-comment" class="w-full p-2 border rounded" placeholder="Write a comment..."></textarea>
+    <button id="submit-comment" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500">Post Comment</button>
+    <button id="close-comment-panel" class="mt-4 px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">Close</button>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const closeModal = document.getElementById('close-modal');
+    const likeButton = document.getElementById('like-button');
+    const likeCount = document.getElementById('like-count');
+    const commentButton = document.getElementById('comment-button');
+    const commentPanel = document.getElementById('comment-panel');
+    const closeCommentPanel = document.getElementById('close-comment-panel');
+    const commentsList = document.getElementById('comments-list');
+    const newComment = document.getElementById('new-comment');
+    const submitComment = document.getElementById('submit-comment');
+
+    document.querySelectorAll('.feed-card').forEach(card => {
+      card.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+        modalImage.src = card.querySelector('img').src;
+        modalTitle.textContent = card.querySelector('h2').textContent;
+        modalDescription.textContent = card.dataset.fullDescription;
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    likeButton.addEventListener('click', () => {
+      likeCount.textContent = parseInt(likeCount.textContent) + 1;
+    });
+
+    commentButton.addEventListener('click', () => {
+      commentPanel.classList.add('open');
+    });
+
+    closeCommentPanel.addEventListener('click', () => {
+      commentPanel.classList.remove('open');
+    });
+
+    submitComment.addEventListener('click', () => {
+      const commentText = newComment.value.trim();
+      if (commentText) {
+        const comment = document.createElement('div');
+        comment.className = 'p-2 border-b';
+        comment.textContent = commentText;
+        commentsList.appendChild(comment);
+        newComment.value = '';
+      }
+    });
+  </script>
+</body>
+</html>

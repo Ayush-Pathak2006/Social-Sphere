@@ -1,3 +1,4 @@
+index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,25 +53,25 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- Example Pins -->
         <div class="pin-card">
-          <img src="travel.jpg" alt="Travel Pin" class="pin-image">
+          <img src="https://source.unsplash.com/300x300/?travel" alt="Travel Pin" class="pin-image">
           <div class="p-4">
             <p class="font-semibold text-gray-800">Explore Beautiful Destinations</p>
           </div>
         </div>
         <div class="pin-card">
-          <img src="food.avif" alt="Food Pin" class="pin-image">
+          <img src="https://source.unsplash.com/300x300/?food" alt="Food Pin" class="pin-image">
           <div class="p-4">
             <p class="font-semibold text-gray-800">Delicious Recipes to Try</p>
           </div>
         </div>
         <div class="pin-card">
-          <img src="fashion.avif" alt="Fashion Pin" class="pin-image">
+          <img src="https://source.unsplash.com/300x300/?fashion" alt="Fashion Pin" class="pin-image">
           <div class="p-4">
             <p class="font-semibold text-gray-800">Latest Fashion Trends</p>
           </div>
         </div>
         <div class="pin-card">
-          <img src="home.jpg" alt="Home Pin" class="pin-image">
+          <img src="https://source.unsplash.com/300x300/?home" alt="Home Pin" class="pin-image">
           <div class="p-4">
             <p class="font-semibold text-gray-800">Home Decor Ideas</p>
           </div>

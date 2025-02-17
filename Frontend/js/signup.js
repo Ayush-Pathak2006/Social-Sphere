@@ -5,7 +5,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value;
   
     try {
-      const response = await fetch("http://localhost:5000/api/users/register", {
+      const response = await fetch("http://localhost:5000/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -19,7 +19,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
         console.log(data); // Registered user info
         // Redirect or other actions
       } else {
-        alert(data.message || "Signup failed!");
+        alert(data.error || "Signup failed!");
       }
     } catch (error) {
       console.error(error);
